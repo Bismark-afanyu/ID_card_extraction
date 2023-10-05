@@ -1,0 +1,21 @@
+name: ID card workflow
+on:
+    push:
+        branches:
+            - main
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: check out the repository code
+              uses: actions/checkout@v3
+            - name: setup the python terminal
+              uses: actions/setup-python@v2
+              with:
+                python-version: 3.11
+            - run: |
+                pip install easyocr
+                pip install pytesseract
+                pip install glob
+                pip install re
+            
