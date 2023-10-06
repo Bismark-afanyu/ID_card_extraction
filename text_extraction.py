@@ -20,7 +20,7 @@ class TextExtract:
         self.img = image  # image to be processed
         self.num = {}  # numeric values extracted
         self.info = {}  # non-numeric values extracted
-        self.extract()  # method for extraction
+        self.extract(fields)  # method for extraction
 
     def numeric_handler(self):  # sourcery skip: raise-specific-error
         """ 
