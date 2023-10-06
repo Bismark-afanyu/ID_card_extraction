@@ -2,6 +2,9 @@ import pytesseract
 import easyocr
 from glob import glob
 import re
+import cv2
+import os 
+from mtcnn import MTCNN
 
 imgs = glob('/home/aja/Documents/ML/dataset/text_extraction/test/*')
 image = imgs[1]
@@ -55,5 +58,32 @@ class TextExtract:
         nums = self.numeric_handler()
         print(nums) # for testing purpose only, remove when not need anymore
 
+    def detect_faces(self):
+        img_data = cv2.imread(image)
+        # Creating an instance of the MTCNN detector
+        detector = MTCNN()
+
+        # Detecting the faces in the image
+        faces = detector.detect_faces(img_data)
+
+        # Creating a directory to save the cropped faces
+        save_dir = os.path.dirname(os.path.abspath(__file__)) + '/cropped_faces'
+        os.makedirs(save_dir, exist_ok=True)
+
+        # Croping and saving the detected faces
+        for i, face in enumerate(faces):
+            x, y, w, h = face['box']
+            cropped_face = img_data[y:y+h, x:x+w]
+            cv2.imwrite(f'{save_dir}/face_{i}.jpg', cropped_face)
+
+            # Drawing bounding boxes around the detected faces
+            cv2.rectangle(img_data, (x, y), (x+w, y+h), (0, 255, 0), 2)
+
+            # Print the cropped face
+            print(f'Cropped Face {i}:') # for testing purpose only, remove when not need anymore
+            print(cropped_face) # for testing purpose only, remove when not need anymore
+        return img_data
+
 
 text = TextExtract(image)
+text.detect_faces()
