@@ -60,7 +60,7 @@ class TextExtract:
         print("Numeric values:")
         if nums:
             for i, num in enumerate(nums):
-                if i < len(fields):
+                if i == len(fields):
                     field = fields[i]
                     self.num = (f"{field}: {num}")
                     print(self.num)
