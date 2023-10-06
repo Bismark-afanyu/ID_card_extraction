@@ -93,7 +93,7 @@ class TextExtract:
             print(cropped_face) # for testing purpose only, remove when not need anymore
         return img_data
 
-fields = ["s.m", "date_of_issue", "date_of_expiry", " unique_identifier", "id_number"]  
+fields = ["s.m", "date_of_issue", "date_of_expiry", "unique_identifier", "id_number"]  
 
 text = TextExtract(image)
 text.extract(fields)
