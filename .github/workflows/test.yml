@@ -10,12 +10,8 @@ jobs:
             - name: check out the repository code
               uses: actions/checkout@v3
             - name: setup the python terminal
-              uses: actions/setup-python@v2
+              uses: actions/setup-python@v3
               with:
                 python-version: 3.11
-            - run: |
-                pip install easyocr
-                pip install pytesseract
-                pip install glob
-                pip install re
-            
+            - name: Print python version
+              run: python -c "import sys; print(sys.version)"
