@@ -91,6 +91,7 @@ class TextExtract:
             print(cropped_face) # for testing purpose only, remove when not need anymore
         return img_data
 
+fields = ["Field_0", "Field_1", "Field_2"]  
 
 text = TextExtract(image)
 text.detect_faces()
