@@ -67,7 +67,7 @@ class TextExtract:
             fieldnames = ["given_name", "surname", "sex", "height", "father", "mother","place_of_birth", "occupation","date_of_birth", 
                           "unique_identifier", "date_of_issue", "date_of_expiry", "id_number", "face", "signature", "sm", "address", "identification_post"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-            writer.writeheader() # set the headers
+            # writer.writeheader() # set the headers TODO find a way to write the header ones
             writer.writerow(info) # fill in the information
 
     def toJSON(self):  # sourcery skip: raise-specific-error
