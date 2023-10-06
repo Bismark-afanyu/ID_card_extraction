@@ -13,9 +13,6 @@ jobs:
               uses: actions/setup-python@v2
               with:
                 python-version: 3.11
-            - run: |
-                pip install easyocr
-                pip install pytesseract
-                pip install glob
-                pip install re
+            - name: Display python version
+              run: python -
             
