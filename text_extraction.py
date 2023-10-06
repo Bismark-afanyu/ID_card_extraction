@@ -6,8 +6,9 @@ import cv2
 import os 
 from mtcnn import MTCNN
 
-imgs = glob('/home/aja/Documents/ML/dataset/text_extraction/test/*')
-image = imgs[1]
+# imgs = glob('/home/aja/Documents/ML/dataset/text_extraction/test/*')
+# image = imgs[1]
+image = "C:/Users/BANTA/Desktop/ML projects/dataSets/Aadhaar/106.jpg"
 
 
 class TextExtract:
