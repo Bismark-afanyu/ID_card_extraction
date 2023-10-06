@@ -95,4 +95,5 @@ class TextExtract:
 fields = ["S.P./S.M", "DATE OF ISSUE", "DATE OF EXPIRY", "UNIQUE IDENTIFIER", "ID NUMBER"]  
 
 text = TextExtract(image)
+text.extract(fields)
 text.detect_faces()
