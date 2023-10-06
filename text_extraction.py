@@ -53,10 +53,17 @@ class TextExtract:
         char = pytesseract.image_to_string(image)
         # still to be implemented
 
-    def extract(self):
-        # still to be implemented
+    def extract(self, fields):
         nums = self.numeric_handler()
-        print(nums) # for testing purpose only, remove when not need anymore
+
+        print("Numeric values:")
+        if nums:
+            for i, num in enumerate(nums):
+                if i < len(fields):
+                    field = fields[i]
+                    print(f"{field}: {num}")
+        else:
+            print("No numeric values found.") # for testing purpose only, remove when not need anymore
 
     def detect_faces(self):
         img_data = cv2.imread(image)
