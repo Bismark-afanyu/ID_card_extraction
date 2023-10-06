@@ -63,6 +63,7 @@ class TextExtract:
                 if i < len(fields):
                     field = fields[i]
                     self.num = (f"{field}: {num}")
+                    print(self.num)
         else:
             print("No numeric values found.") # for testing purpose only, remove when not need anymore
 
