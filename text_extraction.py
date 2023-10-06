@@ -48,8 +48,10 @@ class TextExtract:
 
     def info_handler(self):
         char = pytesseract.image_to_string(image)
+        # still to be implemented
 
     def extract(self):
+        # still to be implemented
         nums = self.numeric_handler()
         print(nums) # for testing purpose only, remove when not need anymore
 
