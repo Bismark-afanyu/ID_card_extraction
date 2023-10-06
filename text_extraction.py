@@ -64,8 +64,7 @@ class TextExtract:
         """
         info = self.string.update(self.num) # concatinating all the informations we have together
         with open(f"{path}/id_cards.csv", 'a', newline='') as csvfile:
-            fieldnames = ["given_name", "surname", "sex", "height", "father", "mother","place_of_birth", "occupation","date_of_birth", 
-                          "unique_identifier", "date_of_issue", "date_of_expiry", "id_number", "face", "signature", "sm", "address", "identification_post"]
+            fieldnames = ["given_name", "surname", "sex", "height", "father", "mother","place_of_birth", "occupation","date_of_birth","unique_identifier", "date_of_issue", "date_of_expiry", "id_number", "face", "signature", "sm", "address", "identification_post"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writeheader() # set the headers
             writer.writerow(info) # fill in the information
