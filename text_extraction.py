@@ -4,7 +4,7 @@ from glob import glob
 import re
 
 imgs = glob('/home/aja/Documents/ML/dataset/text_extraction/test/*')
-image = imgs[0]
+image = imgs[1]
 
 
 class TextExtract:
@@ -40,7 +40,7 @@ class TextExtract:
             else:
                 try:
                     # for every special character identified in our list of special letters
-                    numeric.extend(text for spc in spec if spc in text)
+                    numeric.extend(text.replace(spc, '.') for spc in spec if spc in text)
                 except:
                     # handling extraction error
                     raise Exception('An error occured while extracting numeric values')
