@@ -67,8 +67,16 @@ class TextExtract:
             fieldnames = ["given_name", "surname", "sex", "height", "father", "mother","place_of_birth", "occupation","date_of_birth", 
                           "unique_identifier", "date_of_issue", "date_of_expiry", "id_number", "face", "signature", "sm", "address", "identification_post"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-            writer.writeheader()
-            writer.writerow(info)
+            writer.writeheader() # set the headers
+            writer.writerow(info) # fill in the information
+            
+    def toJSON(self):
+        """This method produces a json format that can be used for cloud operations
+
+        Returns:
+            Dict : dictionary containing all the information extracted from the id card
+        """
+        return self.string.update(self.num)
 
 
 
