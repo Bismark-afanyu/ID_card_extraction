@@ -2,6 +2,7 @@ import pytesseract
 import easyocr
 from glob import glob
 import re
+import csv
 
 imgs = glob('/home/aja/Documents/ML/dataset/text_extraction/test/*')
 image = imgs[1]
@@ -15,7 +16,7 @@ class TextExtract:
     def __init__(self, image):
         self.img = image  # image to be processed
         self.num = {}  # numeric values extracted
-        self.info = {}  # non-numeric values extracted
+        self.string = {}  # non-numeric values extracted
         self.extract()  # method for extraction
 
     def numeric_handler(self):  # sourcery skip: raise-specific-error
@@ -54,6 +55,22 @@ class TextExtract:
         # still to be implemented
         nums = self.numeric_handler()
         print(nums) # for testing purpose only, remove when not need anymore
+    
+    def toCSV(self, path):
+        """This method saves a csv file called id_cards that containes every information collected
+
+        Args:
+            path (String): Containes the path to the directory for the id_cards to be saved
+        """
+        info = self.string.update(self.num) # concatinating all the informations we have together
+        with open(f"{path}/id_cards.csv", 'a', newline='') as csvfile:
+            fieldnames = ["given_name", "surname", "sex", "height", "father", "mother","place_of_birth", "occupation","date_of_birth", 
+                          "unique_identifier", "date_of_issue", "date_of_expiry", "id_number", "face", "signature", "sm", "address", "identification_post"]
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerow(info)
+
+
 
 
 text = TextExtract(image)
