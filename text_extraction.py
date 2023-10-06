@@ -69,14 +69,17 @@ class TextExtract:
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writeheader() # set the headers
             writer.writerow(info) # fill in the information
-            
+
     def toJSON(self):
         """This method produces a json format that can be used for cloud operations
 
         Returns:
             Dict : dictionary containing all the information extracted from the id card
         """
-        return self.string.update(self.num)
+        try:
+            return self.string.update(self.num)
+        except:
+            raise Exception("An error occured during ")
 
 
 
