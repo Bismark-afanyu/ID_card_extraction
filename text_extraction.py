@@ -6,9 +6,9 @@ import cv2
 import os 
 from mtcnn import MTCNN
 
-# imgs = glob('/home/aja/Documents/ML/dataset/text_extraction/test/*')
-# image = imgs[1]
-image = "C:/Users/BANTA/Desktop/ML projects/dataSets/Aadhaar/106.jpg"
+imgs = glob('/home/aja/Documents/ML/dataset/text_extraction/test/*')
+image = imgs[1]
+# image = "C:/Users/BANTA/Desktop/ML projects/dataSets/Aadhaar/106.jpg"
 
 
 class TextExtract:
@@ -75,7 +75,7 @@ class TextExtract:
         faces = detector.detect_faces(img_data)
 
         # Creating a directory to save the cropped faces
-        save_dir = os.path.dirname(os.path.abspath(__file__)) + '/cropped_faces'
+        save_dir = f'{os.path.dirname(os.path.abspath(__file__))}/cropped_faces'
         os.makedirs(save_dir, exist_ok=True)
 
         # Croping and saving the detected faces
