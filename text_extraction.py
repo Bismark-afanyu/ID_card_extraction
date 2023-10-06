@@ -70,7 +70,7 @@ class TextExtract:
             writer.writeheader() # set the headers
             writer.writerow(info) # fill in the information
 
-    def toJSON(self):
+    def toJSON(self):  # sourcery skip: raise-specific-error
         """This method produces a json format that can be used for cloud operations
 
         Returns:
@@ -79,7 +79,7 @@ class TextExtract:
         try:
             return self.string.update(self.num)
         except:
-            raise Exception("An error occured during ")
+            raise Exception("An error occured during concatination of information.")
 
 
 
