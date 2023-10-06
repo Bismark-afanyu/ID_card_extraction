@@ -57,7 +57,7 @@ class TextExtract:
         print(nums) # for testing purpose only, remove when not need anymore
     
     def toCSV(self, path):
-        """This method saves a csv file called id_cards that containes every information collected
+        """This method saves a csv file called id_cards that containes every information collected.
 
         Args:
             path (String): Containes the path to the directory for the id_cards to be saved
@@ -71,7 +71,7 @@ class TextExtract:
             writer.writerow(info) # fill in the information
 
     def toJSON(self):  # sourcery skip: raise-specific-error
-        """This method produces a json format that can be used for cloud operations
+        """This method produces a json format that can be used for cloud operations.
 
         Returns:
             Dict : dictionary containing all the information extracted from the id card
