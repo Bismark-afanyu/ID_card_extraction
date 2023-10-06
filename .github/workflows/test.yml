@@ -3,6 +3,7 @@ on:
     push:
         branches:
             - main
+            - jordan-a
 jobs:
     build:
         runs-on: ubuntu-latest
@@ -14,5 +15,5 @@ jobs:
               with:
                 python-version: 3.11
             - name: Display python version
-              run: python -
+              run: python -c "import sys; print(sys.version)"
             
