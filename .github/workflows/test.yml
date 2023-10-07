@@ -16,3 +16,7 @@ jobs:
                 python-version: 3.11
             - name: Print python version
               run: python -c "import sys; print(sys.version)"
+            - name: Lint ruff install
+              run: |
+                pip install ruff
+                ruff --format=github 
