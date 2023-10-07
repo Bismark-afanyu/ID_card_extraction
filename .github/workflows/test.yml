@@ -24,6 +24,7 @@ jobs:
             - name: Lint ruff install
               run: |
                 pip install ruff
+                ruff check . --watch
                 ruff --output-format=github --target-version=py37
               if: ${{ success() }}
             - name: Build package
