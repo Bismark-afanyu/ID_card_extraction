@@ -26,3 +26,7 @@ jobs:
                 pip install ruff
                 ruff --format=github --target-version=py37
               if: ${{ success() }}
+            - name: Build package
+              run: |
+                pip install build
+                python -m build
