@@ -4,6 +4,7 @@ on:
         branches:
             - main
             - jordan-a
+            - bismark
 jobs:
     build:
         runs-on: ubuntu-latest
@@ -13,10 +14,14 @@ jobs:
             - name: setup the python terminal
               uses: actions/setup-python@v3
               with:
-                python-version: 3.11
+                python-version: 3.x
+            - name: Install dependencies
+              run: |
+                python -m pip install --upgrade pip
+                pip install -r requirements.txt
             - name: Print python version
               run: python -c "import sys; print(sys.version)"
             - name: Lint ruff install
               run: |
                 pip install ruff
-                ruff --format=github 
+                ruff --format=github --target-version=py37
