@@ -1,5 +1,5 @@
-pytesseract==0.3.10
-glob2==0.7
-easyocr==
-re==
-csv==
+pytesseract
+glob2
+easyocr
+regex
+csv
