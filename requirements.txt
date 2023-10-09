@@ -2,4 +2,4 @@ pytesseract
 glob2
 easyocr
 regex
-csv
+# csv
