@@ -55,6 +55,7 @@ class TextExtract:
     def extract(self):
         # still to be implemented
         nums = self.numeric_handler()
+        self.toCSV('/home/aja')
         print(nums) # for testing purpose only, remove when not need anymore
     
     def toCSV(self, path):
