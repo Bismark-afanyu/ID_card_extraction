@@ -3,7 +3,6 @@ import easyocr
 from glob import glob
 import re
 import csv
-import pandas as pd
 
 imgs = glob('/home/aja/Documents/ML/dataset/text_extraction/test/*')
 image = imgs[1]
