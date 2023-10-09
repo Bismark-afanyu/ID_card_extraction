@@ -8,7 +8,7 @@ from mtcnn import MTCNN
 
 # imgs = glob('/home/aja/Documents/ML/dataset/text_extraction/test/*')
 # image = imgs[1]
-image = "C:/Users/BANTA/Desktop/ML projects/dataSets/Aadhaar/105.jpg"
+image = "C:/Users/BANTA/Desktop/ML projects/dataSets/Aadhaar/106.jpg"
 
 
 class TextExtract:
@@ -62,7 +62,7 @@ class TextExtract:
             for i, num in enumerate(nums):
                 if i < len(fields):
                     field = fields[i]
-                    self.num = (f"{field}: {num}")
+                    self.num[f"{field}"] = num
                     print(self.num)
         else:
             print("No numeric values found.") # for testing purpose only, remove when not need anymore
@@ -76,7 +76,7 @@ class TextExtract:
         faces = detector.detect_faces(img_data)
 
         # Creating a directory to save the cropped faces
-        save_dir = os.path.dirname(os.path.abspath(__file__)) + '/cropped_faces'
+        save_dir = f'{os.path.dirname(os.path.abspath(__file__))}/cropped_faces'
         os.makedirs(save_dir, exist_ok=True)
 
         # Croping and saving the detected faces
