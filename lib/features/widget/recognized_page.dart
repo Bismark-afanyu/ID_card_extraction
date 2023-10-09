@@ -43,6 +43,9 @@ class _RecognizePageState extends State<RecognizePage> {
     });
     final RecognizedText recognizedText =
         await textRecognizer.processImage(image);
+        final options = FaceDetectorOptions();
+final faceDetector = FaceDetector(options: options);
+final List<Face> faces = await faceDetector.processImage(image);
 
     _controller.text = recognizedText.text;
 
