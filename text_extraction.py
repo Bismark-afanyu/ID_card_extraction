@@ -55,17 +55,17 @@ class TextExtract:
     def extract(self):
         # still to be implemented
         nums = self.numeric_handler()
-        self.toCSV('/home/aja')
+        self.toCSV()
         print(nums) # for testing purpose only, remove when not need anymore
     
-    def toCSV(self, path):
+    def toCSV(self):
         """This method saves a csv file called id_cards that containes every information collected.
 
         Args:
             path (String): Containes the path to the directory for the id_cards to be saved
         """
         info = self.string.update(self.num) # concatinating all the informations we have together
-        with open(f"{path}/id_cards.csv", 'a', newline='') as csvfile:
+        with open(f"id_cards.csv", 'a', newline='') as csvfile:
             fieldnames = ["given_name", "surname", "sex", "height", "father", "mother","place_of_birth", "occupation","date_of_birth","unique_identifier", "date_of_issue", "date_of_expiry", "id_number", "face", "signature", "sm", "address", "identification_post"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             if pd.read_csv(csvfile)[0].isempty():
