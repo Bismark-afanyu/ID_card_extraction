@@ -30,4 +30,4 @@ jobs:
             - name: Build package
               run: |
                 pip install build
-                python -r text_extraction.py
+                python text_extraction.py
