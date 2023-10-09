@@ -6,9 +6,9 @@ import cv2
 import os 
 from mtcnn import MTCNN
 
-imgs = glob('/home/aja/Documents/ML/dataset/text_extraction/test/*')
-image = imgs[1]
-# image = "C:/Users/BANTA/Desktop/ML projects/dataSets/Aadhaar/106.jpg"
+# imgs = glob('/home/aja/Documents/ML/dataset/text_extraction/test/*')
+# image = imgs[1]
+image = "C:/Users/BANTA/Desktop/ML projects/dataSets/Aadhaar/106.jpg"
 
 
 class TextExtract:
@@ -20,7 +20,7 @@ class TextExtract:
         self.img = image  # image to be processed
         self.num = {}  # numeric values extracted
         self.info = {}  # non-numeric values extracted
-        self.extract()  # method for extraction
+        self.extract(fields)  # method for extraction
 
     def numeric_handler(self):  # sourcery skip: raise-specific-error
         """ 
@@ -62,7 +62,8 @@ class TextExtract:
             for i, num in enumerate(nums):
                 if i < len(fields):
                     field = fields[i]
-                    print(f"{field}: {num}")
+                    self.num = (f"{field}: {num}")
+                    print(self.num)
         else:
             print("No numeric values found.") # for testing purpose only, remove when not need anymore
 
@@ -92,7 +93,9 @@ class TextExtract:
             print(cropped_face) # for testing purpose only, remove when not need anymore
         return img_data
 
-fields = ["S.P./S.M", "DATE OF ISSUE", "DATE OF EXPIRY", "UNIQUE IDENTIFIER", "ID NUMBER"]  
+fields = ["s.m", "date_of_issue", "date_of_expiry", "unique_identifier", "id_number"]  
 
 text = TextExtract(image)
+text.extract(fields)
 text.detect_faces()
+ 
