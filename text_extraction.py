@@ -68,9 +68,9 @@ class TextExtract:
         with open(f"id_cards.csv", 'a', newline='') as csvfile:
             fieldnames = ["given_name", "surname", "sex", "height", "father", "mother","place_of_birth", "occupation","date_of_birth","unique_identifier", "date_of_issue", "date_of_expiry", "id_number", "face", "signature", "sm", "address", "identification_post"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-            if pd.read_csv(csvfile)[0].isempty():
-                writer.writerow(info) # fill in the information
-            writer.writeheader() # set the headers TODO find a way to write the header ones
+            if csvfile.tell() == 0:
+                writer.writeheader() # set the headers TODO find a way to write the header ones
+            writer.writerow(info) # fill in the information
 
     def toJSON(self):  # sourcery skip: raise-specific-error
         """This method produces a json format that can be used for cloud operations.
