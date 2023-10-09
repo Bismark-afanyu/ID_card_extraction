@@ -24,7 +24,6 @@ jobs:
             - name: Lint ruff install
               run: |
                 pip install ruff
-                pip freeze >requirements.txt
                 ruff check . --fix
                 ruff --output-format=github --target-version=py37
               continue-on-error: true
