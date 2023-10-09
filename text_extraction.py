@@ -84,6 +84,8 @@ class TextExtract:
             x, y, w, h = face['box']
             cropped_face = img_data[y:y+h, x:x+w]
             cv2.imwrite(f'{save_dir}/face_{i}.jpg', cropped_face)
+            self.image = str(save_dir) + "/face_" + str(i) + ".jpg"
+            print (self.image) # for testing purpose only, remove when not need anymore
 
             # Drawing bounding boxes around the detected faces
             cv2.rectangle(img_data, (x, y), (x+w, y+h), (0, 255, 0), 2)
