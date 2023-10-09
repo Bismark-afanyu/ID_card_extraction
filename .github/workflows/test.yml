@@ -10,7 +10,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: check out the repository code
-              uses: actions/checkout@v3
+              uses: actions/checkout@v4
             - name: setup the python terminal
               uses: actions/setup-python@v3
               with:
@@ -30,4 +30,4 @@ jobs:
             - name: Build package
               run: |
                 pip install build
-                python -m build
+                python -r text_extraction.py
