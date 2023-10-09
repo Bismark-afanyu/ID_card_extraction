@@ -284,7 +284,6 @@ pyparsing @ file:///work/ci_py311/pyparsing_1677811559502/work
 PyQt5-sip==12.11.0
 pyrsistent @ file:///work/ci_py311/pyrsistent_1676823088752/work
 PySocks @ file:///work/ci_py311/pysocks_1676822712504/work
-pytesseract==0.3.10
 pytest @ file:///croot/pytest_1690474690005/work
 python-bidi==0.4.2
 python-dateutil @ file:///tmp/build/80754af9/python-dateutil_1626374649649/work
@@ -415,3 +414,9 @@ zict @ file:///croot/zict_1682698729376/work
 zipp @ file:///work/ci_py311/zipp_1676822894295/work
 zope.interface @ file:///work/ci_py311/zope.interface_1676905896080/work
 zstandard @ file:///work/ci_py311_2/zstandard_1679339489613/work
+import pytesseract
+import easyocr
+from glob import glob
+import re
+import csv
+pytesseract==0.3.10
