@@ -3,6 +3,7 @@ import easyocr
 from glob import glob
 import re
 import csv
+import pandas as pd
 
 imgs = glob('/home/aja/Documents/ML/dataset/text_extraction/test/*')
 image = imgs[1]
@@ -66,8 +67,9 @@ class TextExtract:
         with open(f"{path}/id_cards.csv", 'a', newline='') as csvfile:
             fieldnames = ["given_name", "surname", "sex", "height", "father", "mother","place_of_birth", "occupation","date_of_birth","unique_identifier", "date_of_issue", "date_of_expiry", "id_number", "face", "signature", "sm", "address", "identification_post"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-            # writer.writeheader() # set the headers TODO find a way to write the header ones
-            writer.writerow(info) # fill in the information
+            if pd.read_csv(csvfile)[0].isempty():
+                writer.writerow(info) # fill in the information
+            writer.writeheader() # set the headers TODO find a way to write the header ones
 
     def toJSON(self):  # sourcery skip: raise-specific-error
         """This method produces a json format that can be used for cloud operations.
