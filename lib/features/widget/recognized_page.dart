@@ -16,7 +16,6 @@ class _RecognizePageState extends State<RecognizePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     final InputImage inputImage = InputImage.fromFilePath(widget.path!);
     processImage(inputImage);
