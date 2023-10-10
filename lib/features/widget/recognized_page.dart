@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
@@ -24,7 +26,7 @@ class _RecognizePageState extends State<RecognizePage> {
 
   @override
   Widget build(BuildContext context) {
-  final int height = MediaQuery.of(context).size.height.toInt();
+  final double height = MediaQuery.of(context).size.height.toInt() / 2;
     return Container(
       child: Scaffold(
           appBar: AppBar(
@@ -38,7 +40,7 @@ class _RecognizePageState extends State<RecognizePage> {
                     children: [
                       TextFormField(
                         controller: _controller,
-                        maxLines: height,
+                        maxLines: height.toInt(),
                         decoration: const InputDecoration(
                             hintText: "Text goes here..."),
                       ),
