@@ -49,7 +49,6 @@ class _RecognizePageState extends State<RecognizePage> {
                           Stack(
                             children: [
                               Container(
-                                  height: 100,
                                   decoration: BoxDecoration(
                                     image: DecorationImage(
                                         image: AssetImage(widget.path!),
