@@ -26,7 +26,7 @@ class _RecognizePageState extends State<RecognizePage> {
 
   @override
   Widget build(BuildContext context) {
-  final double height = MediaQuery.of(context).size.height.toInt() / 2;
+    // final double height = MediaQuery.of(context).size.height.toInt() / 2;
     return Container(
       child: Scaffold(
           appBar: AppBar(
@@ -34,25 +34,28 @@ class _RecognizePageState extends State<RecognizePage> {
           ),
           body: _isBusy
               ? const Center(child: CircularProgressIndicator())
-              : Container(
-                  padding: const EdgeInsets.all(20),
-                  child: Column(
-                    children: [
-                      TextFormField(
-                        controller: _controller,
-                        maxLines: height.toInt(),
-                        decoration: const InputDecoration(
-                            hintText: "Text goes here..."),
-                      ),
-                      Stack(
+              : SingleChildScrollView(
+                  child: Container(
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
                         children: [
+                          TextFormField(
+                            controller: _controller,
+                            maxLines: 100,
+                            decoration: const InputDecoration(
+                                hintText: "Text goes here..."),
+                          ),
                           Container(
-                            child: Image.asset(widget.path!),
+                            height: 150,
+                            child: Stack(
+                              children: [
+                                Image.asset(widget.path!),
+                              ],
+                            ),
                           ),
                         ],
-                      ),
-                    ],
-                  ))),
+                      )),
+                )),
     );
   }
 
@@ -67,7 +70,7 @@ class _RecognizePageState extends State<RecognizePage> {
     final RecognizedText recognizedText =
         await textRecognizer.processImage(image);
     final List<Face> faces = await faceDetector.processImage(image);
-    for (Face face in faces){
+    for (Face face in faces) {
       _faces.add(face);
     }
 
