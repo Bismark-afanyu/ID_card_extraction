@@ -47,6 +47,7 @@ class _RecognizePageState extends State<RecognizePage> {
                             child: Stack(
                               children: [
                                 Image.asset(widget.path!),
+                                _drawFaceRect(_faces, context)
                               ],
                             ),
                           ),
@@ -83,15 +84,9 @@ class _RecognizePageState extends State<RecognizePage> {
   }
 
   _drawFaceRect(List<Face> faces, BuildContext context) {
-    for (Face face in faces) {
-      final rect = face.boundingBox;
-      final paint = Paint()
-        ..color = Colors.red
-        ..strokeWidth = 2.0;
-      return CustomPaint(
-        painter: FacePainter(faces),
-      );
-    }
+    return CustomPaint(
+      painter: FacePainter(faces),
+    );
   }
 }
 
