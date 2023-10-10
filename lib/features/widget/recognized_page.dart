@@ -76,7 +76,7 @@ class _RecognizePageState extends State<RecognizePage> {
   Widget _drawFaceRect(Face face) {
     final rect = face.boundingBox;
     final paint = Paint()
-      ..color = Colors.red
+      ..color = Colors.blue
       ..strokeWidth = 0.1;
 
     return CustomPaint(
