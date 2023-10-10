@@ -43,7 +43,7 @@ class _RecognizePageState extends State<RecognizePage> {
                             decoration: const InputDecoration(
                                 hintText: "Text goes here..."),
                           ),
-                          FittedBox(
+                          Container(
                             child: Stack(
                               children: [
                                 Image.asset(widget.path!),
