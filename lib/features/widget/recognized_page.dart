@@ -141,7 +141,7 @@ class _FacePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
+    final draw = Paint()
       ..color = Colors.red
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.0;
@@ -159,7 +159,7 @@ class _FacePainter extends CustomPainter {
           rect.right * width,
           rect.bottom * height,
         );
-        canvas.drawRect(transformedRect, paint);
+        canvas.drawRect(transformedRect, draw);
       }),
     );
   }
