@@ -52,7 +52,7 @@ class _RecognizePageState extends State<RecognizePage> {
                             left: 0,
                             top: 0,
                             child: Container(
-                                decoration: BoxDecoration(
+                              decoration: BoxDecoration(
                               image: DecorationImage(
                                   image: AssetImage(widget.path!),
                                   fit: BoxFit.cover),
