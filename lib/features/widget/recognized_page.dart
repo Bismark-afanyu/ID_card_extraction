@@ -32,7 +32,7 @@ class _RecognizePageState extends State<RecognizePage> {
               ? const Center(child: CircularProgressIndicator())
               : Container(
                   padding: const EdgeInsets.all(20),
-                  child: TextFormField(controller: _controller, maxLines: MediaQuery.of(context).size.height.toInt(),decoration: const InputDecoration(hintText: "Text goes here..."),))),
+                  child: TextFormField(controller: _controller, maxLines: MediaQuery.of(context).size.height.toInt(), decoration: const InputDecoration(hintText: "Text goes here..."),))),
     );
   }
 
