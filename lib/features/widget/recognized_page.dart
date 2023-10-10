@@ -47,13 +47,25 @@ class _RecognizePageState extends State<RecognizePage> {
                             child: Stack(
                               children: [
                                 Image.asset(widget.path!),
-                                _drawFaceRect(_faces, context)
+                                for (Face face in _faces)
+                                  _drawFaceRect(face, context),
                               ],
                             ),
                           ),
                         ],
                       )),
                 )),
+    );
+  }
+
+  Widget _drawFaceRect(Face face, BuildContext context) {
+    final rect = face.boundingBox;
+    final paint = Paint()
+      ..color = Colors.red
+      ..strokeWidth = 2.0;
+
+    return CustomPaint(
+      painter: _FacePainter(rect, paint),
     );
   }
 
@@ -79,38 +91,21 @@ class _RecognizePageState extends State<RecognizePage> {
       _isBusy = false;
     });
   }
-
-  _drawFaceRect(List<Face> faces, BuildContext context) {
-    return CustomPaint(
-      painter: FacePainter(faces),
-    );
-  }
 }
 
-class FacePainter extends CustomPainter {
-  final List<Face> faces;
-  final List<Rect> rects = [];
+class _FacePainter extends CustomPainter {
+  final Rect rect;
+  final Paint draw;
 
-  FacePainter(this.faces) {
-    for (var i = 0; i < faces.length; i++) {
-      rects.add(faces[i].boundingBox);
-    }
-  }
+  _FacePainter(this.rect, this.draw);
 
   @override
   void paint(Canvas canvas, Size size) {
-    final Paint paint = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 15.0
-      ..color = Colors.blue;
-
-    for (var i = 0; i < faces.length; i++) {
-      canvas.drawRect(rects[i], paint);
-    }
+    canvas.drawRect(rect, draw);
   }
 
   @override
-  bool shouldRepaint(FacePainter oldDelegate) {
-    return false;
+  bool shouldRepaint(_FacePainter oldDelegate) {
+    return rect != oldDelegate.rect || paint != oldDelegate.paint;
   }
 }
