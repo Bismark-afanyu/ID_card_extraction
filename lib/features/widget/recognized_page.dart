@@ -13,20 +13,15 @@ class RecognizePage extends StatefulWidget {
 class _RecognizePageState extends State<RecognizePage> {
   bool _isBusy = false;
   final TextEditingController _controller = TextEditingController();
-  final InputImage inputImage = InputImage.fromFilePath('');
   List<Face> _faces = [];
 
   @override
   void initState() {
     super.initState();
-    // final InputImage inputImage = InputImage.fromFilePath(widget.path!);
-    // print(inputImage.filePath);
-    // processImage(inputImage);
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
-      final InputImage inputImage = InputImage.fromFilePath(widget.path!);
-      print(inputImage.filePath);
-      processImage(inputImage);
-    });
+    final InputImage inputImage = InputImage.fromFilePath(widget.path!);
+    print(inputImage.filePath);
+    processImage(inputImage);
+    
   }
 
   @override
@@ -57,7 +52,7 @@ class _RecognizePageState extends State<RecognizePage> {
                             child: Container(
                                 decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: AssetImage(inputImage.filePath!),
+                                  image: AssetImage(widget.path!),
                                   fit: BoxFit.cover),
                             )),
                           )
