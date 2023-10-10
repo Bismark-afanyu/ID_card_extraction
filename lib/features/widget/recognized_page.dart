@@ -34,8 +34,19 @@ class _RecognizePageState extends State<RecognizePage> {
                   padding: const EdgeInsets.all(20),
                   child: Column(
                     children: [
-                      TextFormField(controller: _controller, maxLines: MediaQuery.of(context).size.height.toInt(), decoration: const InputDecoration(hintText: "Text goes here..."),),
-                      Container(child: Image.asset(widget.path!),)
+                      TextFormField(
+                        controller: _controller,
+                        maxLines: MediaQuery.of(context).size.height.toInt(),
+                        decoration: const InputDecoration(
+                            hintText: "Text goes here..."),
+                      ),
+                      Stack(
+                        children: [
+                          Container(
+                            child: Image.asset(widget.path!),
+                          ),
+                        ],
+                      ),
                     ],
                   ))),
     );
@@ -43,20 +54,34 @@ class _RecognizePageState extends State<RecognizePage> {
 
   void processImage(InputImage image) async {
     final textRecognizer = TextRecognizer(script: TextRecognitionScript.latin);
-        final options = FaceDetectorOptions(performanceMode: FaceDetectorMode.accurate);
-        final faceDetector = FaceDetector(options: options);
+    final options =
+        FaceDetectorOptions(performanceMode: FaceDetectorMode.accurate);
+    final faceDetector = FaceDetector(options: options);
     setState(() {
       _isBusy = true;
     });
     final RecognizedText recognizedText =
         await textRecognizer.processImage(image);
-        final List<Face> faces = await faceDetector.processImage(image);
+    final List<Face> faces = await faceDetector.processImage(image);
 
     _controller.text = recognizedText.text;
+    for (Face face in faces){
+      _drawFaceRect(face, context);
+      }
+    
 
     /// End Busy state
     setState(() {
       _isBusy = false;
     });
+  }
+
+  _drawFaceRect(Face face, BuildContext context) {
+    final rect = face.boundingBox;
+    final paint = Paint()
+      ..color = Colors.red
+      ..strokeWidth = 2.0;
+
+    return rect;
   }
 }
