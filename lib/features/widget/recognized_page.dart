@@ -114,16 +114,3 @@ class FacePainter extends CustomPainter {
     return false;
   }
 }
-// class MyPainter extends CustomPainter {
-
-//   @override
-//   void paint(Canvas canvas, Size size) {
-// canvas.drawRect(rect, paint)
-//   }
-
-//   @override
-//   bool shouldRepaint(MyPainter oldDelegate) => false;
-
-//   @override
-//   bool shouldRebuildSemantics(MyPainter oldDelegate) => false;
-// }
