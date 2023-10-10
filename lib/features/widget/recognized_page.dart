@@ -24,6 +24,7 @@ class _RecognizePageState extends State<RecognizePage> {
 
   @override
   Widget build(BuildContext context) {
+  final int height = MediaQuery.of(context).size.height.toInt();
     return Container(
       child: Scaffold(
           appBar: AppBar(
@@ -37,7 +38,7 @@ class _RecognizePageState extends State<RecognizePage> {
                     children: [
                       TextFormField(
                         controller: _controller,
-                        maxLines: MediaQuery.of(context).size.height.toInt(),
+                        maxLines: height,
                         decoration: const InputDecoration(
                             hintText: "Text goes here..."),
                       ),
