@@ -34,40 +34,38 @@ class _RecognizePageState extends State<RecognizePage> {
           ),
           body: _isBusy
               ? const Center(child: CircularProgressIndicator())
-              : SingleChildScrollView(
-                  child: Expanded(
-                      // padding: const EdgeInsets.all(20),
-                      child: Column(
+              : Expanded(
+                  // padding: const EdgeInsets.all(20),
+                  child: Column(
+                children: [
+                  Container(
+                    height: 100,
+                    child: TextFormField(
+                      controller: _controller,
+                      maxLines: height,
+                      decoration: const InputDecoration(
+                          hintText: "Text goes here..."),
+                    ),
+                  ),
+                  Stack(
                     children: [
-                      Container(
-                        height: 100,
-                        child: TextFormField(
-                          controller: _controller,
-                          maxLines: height,
-                          decoration: const InputDecoration(
-                              hintText: "Text goes here..."),
-                        ),
-                      ),
-                      Stack(
-                        children: [
-                          Positioned(
-                            left: 0,
-                            top: 0,
-                            child: Container(
-                                decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage(widget.path!),
-                                  fit: BoxFit.cover),
-                            )),
-                          )
+                      Positioned(
+                        left: 0,
+                        top: 0,
+                        child: Container(
+                            decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage(widget.path!),
+                              fit: BoxFit.cover),
+                        )),
+                      )
 
-                          // for (Face face in _faces)
-                          //   _drawFaceRect(face, context),
-                        ],
-                      ),
+                      // for (Face face in _faces)
+                      //   _drawFaceRect(face, context),
                     ],
-                  )),
-                )),
+                  ),
+                ],
+              ))),
     );
   }
 
