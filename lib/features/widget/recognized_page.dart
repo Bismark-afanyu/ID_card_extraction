@@ -77,7 +77,7 @@ class _RecognizePageState extends State<RecognizePage> {
     final rect = face.boundingBox;
     final paint = Paint()
       ..color = Colors.red
-      ..strokeWidth = 2.0;
+      ..strokeWidth = 0.1;
 
     return CustomPaint(
       painter: _FacePainter(rect, paint),
