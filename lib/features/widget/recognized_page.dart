@@ -47,21 +47,20 @@ class _RecognizePageState extends State<RecognizePage> {
                             ),
                           ),
                           Stack(
+  
                             children: [
-                              Container(
+                              Positioned(
+                                child: Container(
                                   decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: Colors.black12,
-                                      width: double.infinity,
-    
-                                    ),
                                     image: DecorationImage(
                                         image: AssetImage(widget.path!),
                                         fit: BoxFit.cover
                                         ),
                                   )),
-                              for (Face face in _faces)
-                                _drawFaceRect(face, context),
+                              )
+                              
+                              // for (Face face in _faces)
+                              //   _drawFaceRect(face, context),
                             ],
                           ),
                         ],
