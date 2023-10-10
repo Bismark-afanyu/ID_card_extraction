@@ -13,12 +13,14 @@ class RecognizePage extends StatefulWidget {
 class _RecognizePageState extends State<RecognizePage> {
   bool _isBusy = false;
   final TextEditingController _controller = TextEditingController();
+  // late InputImage inputImage;
   List<Face> _faces = [];
 
   @override
   void initState() {
     super.initState();
     final InputImage inputImage = InputImage.fromFilePath(widget.path!);
+    print(inputImage);
     processImage(inputImage);
   }
 
@@ -52,7 +54,7 @@ class _RecognizePageState extends State<RecognizePage> {
                             left: 0,
                             top: 0,
                             child: Container(
-                              decoration: BoxDecoration(
+                                decoration: BoxDecoration(
                               image: DecorationImage(
                                   image: AssetImage(widget.path!),
                                   fit: BoxFit.cover),
