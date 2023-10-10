@@ -13,7 +13,7 @@ class RecognizePage extends StatefulWidget {
 class _RecognizePageState extends State<RecognizePage> {
   bool _isBusy = false;
   final TextEditingController _controller = TextEditingController();
-  final List<Face> faces = [];
+  final List<Face> _faces = [];
 
   @override
   void initState() {
@@ -64,11 +64,14 @@ class _RecognizePageState extends State<RecognizePage> {
     final RecognizedText recognizedText =
         await textRecognizer.processImage(image);
     final List<Face> faces = await faceDetector.processImage(image);
+    for (Face face in faces){
+      _faces.add(face);
+    }
 
     _controller.text = recognizedText.text;
-    for (Face face in faces) {
-      _drawFaceRect(face, context);
-    }
+    // for (Face face in faces) {
+    //   _drawFaceRect(face, context);
+    // }
 
     /// End Busy state
     setState(() {
@@ -76,12 +79,26 @@ class _RecognizePageState extends State<RecognizePage> {
     });
   }
 
-  _drawFaceRect(Face face, BuildContext context) {
-    final rect = face.boundingBox;
-    final paint = Paint()
-      ..color = Colors.red
-      ..strokeWidth = 2.0;
+  // _drawFaceRect(Face face, BuildContext context) {
+  //   final rect = face.boundingBox;
+  //   final paint = Paint()
+  //     ..color = Colors.red
+  //     ..strokeWidth = 2.0;
 
-    return rect;
-  }
+  //   return CustomPaint(painter: MyPainter(),);
+  // }
 }
+
+// class MyPainter extends CustomPainter {
+
+//   @override
+//   void paint(Canvas canvas, Size size) {
+// canvas.drawRect(rect, paint)
+//   }
+
+//   @override
+//   bool shouldRepaint(MyPainter oldDelegate) => false;
+
+//   @override
+//   bool shouldRebuildSemantics(MyPainter oldDelegate) => false;
+// }
