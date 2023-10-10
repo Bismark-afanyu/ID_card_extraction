@@ -73,9 +73,6 @@ class _RecognizePageState extends State<RecognizePage> {
     }
 
     _controller.text = recognizedText.text;
-    // for (Face face in faces) {
-    //   _drawFaceRect(face, context);
-    // }
 
     /// End Busy state
     setState(() {
