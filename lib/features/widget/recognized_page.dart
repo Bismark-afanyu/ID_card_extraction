@@ -33,8 +33,8 @@ class _RecognizePageState extends State<RecognizePage> {
           body: _isBusy
               ? const Center(child: CircularProgressIndicator())
               : SingleChildScrollView(
-                  child: Container(
-                      padding: const EdgeInsets.all(20),
+                  child: Expanded(
+                      // padding: const EdgeInsets.all(20),
                       child: Column(
                         children: [
                           Container(
