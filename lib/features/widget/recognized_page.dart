@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
@@ -14,13 +16,13 @@ class RecognizePage extends StatefulWidget {
 class _RecognizePageState extends State<RecognizePage> {
   bool _isBusy = false;
   final TextEditingController _controller = TextEditingController();
-  InputImage? inputImage;
+  late InputImage inputImage;
   List<Face> _faces = [];
 
   @override
   void initState() {
     super.initState();
-    _processImage();
+    _processImage(inputImage);
   }
 
   @override
@@ -64,14 +66,7 @@ class _RecognizePageState extends State<RecognizePage> {
       child: Stack(
         children: [
           Positioned(
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(widget.path),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+            child: Image.file(File(inputImage.filePath!)),
           ),
           for (Face face in _faces) _drawFaceRect(face),
         ],
@@ -90,19 +85,22 @@ class _RecognizePageState extends State<RecognizePage> {
     );
   }
 
-  Future<void> _processImage() async {
+  Future<void> _processImage(InputImage? inputor) async {
     setState(() {
       _isBusy = true;
     });
 
     try {
-      final inputImage = InputImage.fromFilePath(widget.path);
-      final textRecognizer = TextRecognizer(script: TextRecognitionScript.latin);
-      final options = FaceDetectorOptions(performanceMode: FaceDetectorMode.accurate);
+      inputor = InputImage.fromFilePath(widget.path);
+      final textRecognizer =
+          TextRecognizer(script: TextRecognitionScript.latin);
+      final options =
+          FaceDetectorOptions(performanceMode: FaceDetectorMode.accurate);
       final faceDetector = FaceDetector(options: options);
 
-      final RecognizedText recognizedText = await textRecognizer.processImage(inputImage);
-      final List<Face> faces = await faceDetector.processImage(inputImage);
+      final RecognizedText recognizedText =
+          await textRecognizer.processImage(inputor);
+      final List<Face> faces = await faceDetector.processImage(inputor);
 
       _controller.text = recognizedText.text;
 
