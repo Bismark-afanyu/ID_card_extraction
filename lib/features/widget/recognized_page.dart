@@ -3,11 +3,12 @@ import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 
 class RecognizePage extends StatefulWidget {
-  const RecognizePage({super.key, this.path});
-  final String? path;
+  const RecognizePage({Key? key, required this.path}) : super(key: key);
+
+  final String path;
 
   @override
-  State<RecognizePage> createState() => _RecognizePageState();
+  _RecognizePageState createState() => _RecognizePageState();
 }
 
 class _RecognizePageState extends State<RecognizePage> {
@@ -19,58 +20,66 @@ class _RecognizePageState extends State<RecognizePage> {
   @override
   void initState() {
     super.initState();
-    final InputImage inputImage = InputImage.fromFilePath(widget.path!);
-    processImage(inputImage);
+    _processImage();
   }
 
   @override
   Widget build(BuildContext context) {
     final int height = MediaQuery.of(context).size.height.toInt();
-    return Container(
-      child: Scaffold(
-          appBar: AppBar(
-            title: const Text("Text"),
-          ),
-          body: _isBusy
-              ? const Center(child: CircularProgressIndicator())
-              : SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        height: 100,
-                        child: TextFormField(
-                          controller: _controller,
-                          maxLines: height,
-                          decoration: const InputDecoration(
-                              hintText: "Text goes here..."),
-                        ),
-                      ),
-                      Container(
-                        height: height / 2,
-                        child: Stack(
-                          children: [
-                            Positioned(
-                              child: Container(
-                                  decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage(widget.path!),
-                                    fit: BoxFit.cover),
-                              )),
-                            )
 
-                            // for (Face face in _faces)
-                            //   _drawFaceRect(face, context),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                )),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Text"),
+      ),
+      body: _isBusy
+          ? const Center(child: CircularProgressIndicator())
+          : SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildTextInputField(height),
+                  _buildImageContainer(height),
+                ],
+              ),
+            ),
     );
   }
 
-  Widget _drawFaceRect(Face face, BuildContext context) {
+  Widget _buildTextInputField(int height) {
+    return Container(
+      height: 100,
+      child: TextFormField(
+        controller: _controller,
+        maxLines: height,
+        decoration: const InputDecoration(
+          hintText: "Text goes here...",
+        ),
+      ),
+    );
+  }
+
+  Widget _buildImageContainer(int height) {
+    return Container(
+      height: height / 2,
+      child: Stack(
+        children: [
+          Positioned(
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(widget.path),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ),
+          for (Face face in _faces) _drawFaceRect(face),
+        ],
+      ),
+    );
+  }
+
+  Widget _drawFaceRect(Face face) {
     final rect = face.boundingBox;
     final paint = Paint()
       ..color = Colors.red
@@ -81,25 +90,33 @@ class _RecognizePageState extends State<RecognizePage> {
     );
   }
 
-  void processImage(InputImage image) async {
-    final textRecognizer = TextRecognizer(script: TextRecognitionScript.latin);
-    final options =
-        FaceDetectorOptions(performanceMode: FaceDetectorMode.accurate);
-    final faceDetector = FaceDetector(options: options);
+  Future<void> _processImage() async {
     setState(() {
       _isBusy = true;
     });
-    final RecognizedText recognizedText =
-        await textRecognizer.processImage(image);
-    final List<Face> faces = await faceDetector.processImage(image);
 
-    _controller.text = recognizedText.text;
+    try {
+      final inputImage = InputImage.fromFilePath(widget.path);
+      final textRecognizer = TextRecognizer(script: TextRecognitionScript.latin);
+      final options = FaceDetectorOptions(performanceMode: FaceDetectorMode.accurate);
+      final faceDetector = FaceDetector(options: options);
 
-    /// End Busy state
-    setState(() {
-      _faces = faces;
-      _isBusy = false;
-    });
+      final RecognizedText recognizedText = await textRecognizer.processImage(inputImage);
+      final List<Face> faces = await faceDetector.processImage(inputImage);
+
+      _controller.text = recognizedText.text;
+
+      setState(() {
+        _faces = faces;
+        _isBusy = false;
+      });
+    } catch (e) {
+      // Handle any exceptions or errors here
+      setState(() {
+        _isBusy = false;
+      });
+      print('Error processing image: $e');
+    }
   }
 }
 
@@ -116,6 +133,6 @@ class _FacePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_FacePainter oldDelegate) {
-    return rect != oldDelegate.rect || paint != oldDelegate.paint;
+    return rect != oldDelegate.rect || draw != oldDelegate.draw;
   }
 }
