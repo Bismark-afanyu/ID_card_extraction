@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
@@ -45,8 +43,7 @@ class _RecognizePageState extends State<RecognizePage> {
                             decoration: const InputDecoration(
                                 hintText: "Text goes here..."),
                           ),
-                          Container(
-                            height: 150,
+                          FittedBox(
                             child: Stack(
                               children: [
                                 Image.asset(widget.path!),
@@ -85,16 +82,46 @@ class _RecognizePageState extends State<RecognizePage> {
     });
   }
 
-  // _drawFaceRect(Face face, BuildContext context) {
-  //   final rect = face.boundingBox;
-  //   final paint = Paint()
-  //     ..color = Colors.red
-  //     ..strokeWidth = 2.0;
-
-  //   return CustomPaint(painter: MyPainter(),);
-  // }
+  _drawFaceRect(List<Face> faces, BuildContext context) {
+    for (Face face in faces) {
+      final rect = face.boundingBox;
+      final paint = Paint()
+        ..color = Colors.red
+        ..strokeWidth = 2.0;
+      return CustomPaint(
+        painter: FacePainter(faces),
+      );
+    }
+  }
 }
 
+class FacePainter extends CustomPainter {
+  final List<Face> faces;
+  final List<Rect> rects = [];
+
+  FacePainter(this.faces) {
+    for (var i = 0; i < faces.length; i++) {
+      rects.add(faces[i].boundingBox);
+    }
+  }
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final Paint paint = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 15.0
+      ..color = Colors.blue;
+
+    for (var i = 0; i < faces.length; i++) {
+      canvas.drawRect(rects[i], paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(FacePainter oldDelegate) {
+    return false;
+  }
+}
 // class MyPainter extends CustomPainter {
 
 //   @override
