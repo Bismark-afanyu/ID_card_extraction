@@ -13,6 +13,7 @@ class RecognizePage extends StatefulWidget {
 class _RecognizePageState extends State<RecognizePage> {
   bool _isBusy = false;
   final TextEditingController _controller = TextEditingController();
+  final List<Face> faces = [];
 
   @override
   void initState() {
@@ -65,10 +66,9 @@ class _RecognizePageState extends State<RecognizePage> {
     final List<Face> faces = await faceDetector.processImage(image);
 
     _controller.text = recognizedText.text;
-    for (Face face in faces){
+    for (Face face in faces) {
       _drawFaceRect(face, context);
-      }
-    
+    }
 
     /// End Busy state
     setState(() {
