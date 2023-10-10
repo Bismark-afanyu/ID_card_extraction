@@ -100,12 +100,12 @@ class _RecognizePageState extends State<RecognizePage> {
       final RecognizedText recognizedText =
           await textRecognizer.processImage(inputor);
       final List<Face> faces = await faceDetector.processImage(inputor);
-      _faces = faces;
+     
 
       _controller.text = recognizedText.text;
 
       setState(() {
-        // _faces = faces;
+        _faces = faces;
         _isBusy = false;
       });
     } catch (e) {
