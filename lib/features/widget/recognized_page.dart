@@ -13,15 +13,14 @@ class RecognizePage extends StatefulWidget {
 class _RecognizePageState extends State<RecognizePage> {
   bool _isBusy = false;
   final TextEditingController _controller = TextEditingController();
+  InputImage? inputImage;
   List<Face> _faces = [];
 
   @override
   void initState() {
     super.initState();
     final InputImage inputImage = InputImage.fromFilePath(widget.path!);
-    print(inputImage.filePath);
     processImage(inputImage);
-    
   }
 
   @override
@@ -48,7 +47,7 @@ class _RecognizePageState extends State<RecognizePage> {
                         ),
                       ),
                       Container(
-                        height: height/2,
+                        height: height / 2,
                         child: Stack(
                           children: [
                             Positioned(
@@ -59,7 +58,7 @@ class _RecognizePageState extends State<RecognizePage> {
                                     fit: BoxFit.cover),
                               )),
                             )
-                      
+
                             // for (Face face in _faces)
                             //   _drawFaceRect(face, context),
                           ],
