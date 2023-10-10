@@ -36,6 +36,7 @@ class _RecognizePageState extends State<RecognizePage> {
               ? const Center(child: CircularProgressIndicator())
               : SingleChildScrollView(
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
                         height: 100,
@@ -46,20 +47,23 @@ class _RecognizePageState extends State<RecognizePage> {
                               hintText: "Text goes here..."),
                         ),
                       ),
-                      Stack(
-                        children: [
-                          Positioned(
-                            child: Container(
-                                decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage(widget.path!),
-                                  fit: BoxFit.cover),
-                            )),
-                          )
-
-                          // for (Face face in _faces)
-                          //   _drawFaceRect(face, context),
-                        ],
+                      Container(
+                        height: height/2,
+                        child: Stack(
+                          children: [
+                            Positioned(
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage(widget.path!),
+                                    fit: BoxFit.cover),
+                              )),
+                            )
+                      
+                            // for (Face face in _faces)
+                            //   _drawFaceRect(face, context),
+                          ],
+                        ),
                       ),
                     ],
                   ),
