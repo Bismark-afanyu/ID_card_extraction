@@ -41,7 +41,7 @@ class _RecognizePageState extends State<RecognizePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _buildTextInputField(height),
-                  _buildImageContainer(height, context),
+                  _buildImageContainer(height, context, inputImage.filePath!),
                 ],
               ),
             ),
@@ -61,29 +61,29 @@ class _RecognizePageState extends State<RecognizePage> {
     );
   }
 
-  Widget _buildImageContainer(int height, BuildContext context) {
+  Widget _buildImageContainer(int height, BuildContext context, String path) {
     return Container(
       height: height / 2,
       child: Stack(
         children: [
           Image.file(File(inputImage.filePath!)),
-          // for (Face face in _faces) _drawFaceRect(face, context),
+          for (Face face in _faces) _drawFaceRect(face, context, path),
         ],
       ),
     );
   }
 
-  // Widget _drawFaceRect(Face face, BuildContext context) {
-  // final rect = face.boundingBox;
+  Widget _drawFaceRect(Face face, BuildContext context, String path) {
+  final rect = face.boundingBox;
   // final paint = Paint()
   //   ..color = Colors.blue
   //   ..strokeWidth = 0.1;
 
-  // return CustomPaint(
-  //   painter: _FacePainter(rect, paint),
-  // );
+  return CustomPaint(
+    painter: _FacePainter(rect: rect, imagePath: path),
+  );
 
-  // }
+  }
 
   Future<void> _processImage(InputImage? inputor) async {
     setState(() {
@@ -135,10 +135,10 @@ class _FacePainter extends CustomPainter {
   //   return rect != oldDelegate.rect || draw != oldDelegate.draw;
   // }
 
-  final List<Rect> rects;
+  final Rect rect;
   final String imagePath;
 
-  _FacePainter({required this.rects, required this.imagePath});
+  _FacePainter({required this.rect, required this.imagePath});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -154,7 +154,6 @@ class _FacePainter extends CustomPainter {
         final width = size.width / imageInfo.width;
         final height = size.height / imageInfo.height;
 
-        for (final rect in rects) {
           final transformedRect = Rect.fromLTRB(
             rect.left * width,
             rect.top * height,
@@ -162,7 +161,7 @@ class _FacePainter extends CustomPainter {
             rect.bottom * height,
           );
           canvas.drawRect(transformedRect, paint);
-        }
+        
       }),
     );
   }
