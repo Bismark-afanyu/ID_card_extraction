@@ -41,7 +41,7 @@ class _RecognizePageState extends State<RecognizePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _buildTextInputField(height),
-                  _buildImageContainer(height),
+                  _buildImageContainer(height, context),
                 ],
               ),
             ),
@@ -61,19 +61,19 @@ class _RecognizePageState extends State<RecognizePage> {
     );
   }
 
-  Widget _buildImageContainer(int height) {
+  Widget _buildImageContainer(int height, BuildContext context) {
     return Container(
       height: height / 2,
       child: Stack(
         children: [
           Image.file(File(inputImage.filePath!)),
-          for (Face face in _faces) _drawFaceRect(face),
+          for (Face face in _faces) _drawFaceRect(face, context),
         ],
       ),
     );
   }
 
-  Widget _drawFaceRect(Face face) {
+  Widget _drawFaceRect(Face face, BuildContext context) {
     final rect = face.boundingBox;
     final paint = Paint()
       ..color = Colors.blue
