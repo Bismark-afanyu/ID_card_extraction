@@ -74,15 +74,14 @@ class _RecognizePageState extends State<RecognizePage> {
   }
 
   Widget _drawFaceRect(Face face, BuildContext context, String path) {
-  final rect = face.boundingBox;
-  // final paint = Paint()
-  //   ..color = Colors.blue
-  //   ..strokeWidth = 0.1;
+    final rect = face.boundingBox;
+    // final paint = Paint()
+    //   ..color = Colors.blue
+    //   ..strokeWidth = 0.1;
 
-  return CustomPaint(
-    painter: _FacePainter(rect: rect, imagePath: path),
-  );
-
+    return CustomPaint(
+      painter: _FacePainter(rect: rect, imagePath: path),
+    );
   }
 
   Future<void> _processImage(InputImage? inputor) async {
@@ -154,14 +153,13 @@ class _FacePainter extends CustomPainter {
         final width = size.width / imageInfo.width;
         final height = size.height / imageInfo.height;
 
-          final transformedRect = Rect.fromLTRB(
-            rect.left * width,
-            rect.top * height,
-            rect.right * width,
-            rect.bottom * height,
-          );
-          canvas.drawRect(transformedRect, paint);
-        
+        final transformedRect = Rect.fromLTRB(
+          rect.left * width,
+          rect.top * height,
+          rect.right * width,
+          rect.bottom * height,
+        );
+        canvas.drawRect(transformedRect, paint);
       }),
     );
   }
