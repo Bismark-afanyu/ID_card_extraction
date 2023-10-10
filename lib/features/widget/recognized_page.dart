@@ -67,22 +67,23 @@ class _RecognizePageState extends State<RecognizePage> {
       child: Stack(
         children: [
           Image.file(File(inputImage.filePath!)),
-          for (Face face in _faces) _drawFaceRect(face, context),
+          // for (Face face in _faces) _drawFaceRect(face, context),
         ],
       ),
     );
   }
 
-  Widget _drawFaceRect(Face face, BuildContext context) {
-    final rect = face.boundingBox;
-    final paint = Paint()
-      ..color = Colors.blue
-      ..strokeWidth = 0.1;
+  // Widget _drawFaceRect(Face face, BuildContext context) {
+  // final rect = face.boundingBox;
+  // final paint = Paint()
+  //   ..color = Colors.blue
+  //   ..strokeWidth = 0.1;
 
-    return CustomPaint(
-      painter: _FacePainter(rect, paint),
-    );
-  }
+  // return CustomPaint(
+  //   painter: _FacePainter(rect, paint),
+  // );
+
+  // }
 
   Future<void> _processImage(InputImage? inputor) async {
     setState(() {
@@ -119,18 +120,54 @@ class _RecognizePageState extends State<RecognizePage> {
 }
 
 class _FacePainter extends CustomPainter {
-  final Rect rect;
-  final Paint draw;
+  // final Rect rect;
+  // final Paint draw;
 
-  _FacePainter(this.rect, this.draw);
+  // _FacePainter(this.rect, this.draw);
+
+  // @override
+  // void paint(Canvas canvas, Size size) {
+  //   canvas.drawRect(rect, draw);
+  // }
+
+  // @override
+  // bool shouldRepaint(_FacePainter oldDelegate) {
+  //   return rect != oldDelegate.rect || draw != oldDelegate.draw;
+  // }
+
+  final List<Rect> rects;
+  final String imagePath;
+
+  _FacePainter({required this.rects, required this.imagePath});
 
   @override
   void paint(Canvas canvas, Size size) {
-    canvas.drawRect(rect, draw);
+    final paint = Paint()
+      ..color = Colors.red
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2.0;
+
+    final image = FileImage(File(imagePath));
+    image.resolve(ImageConfiguration()).addListener(
+      ImageStreamListener((info, _) {
+        final imageInfo = info.image;
+        final width = size.width / imageInfo.width;
+        final height = size.height / imageInfo.height;
+
+        for (final rect in rects) {
+          final transformedRect = Rect.fromLTRB(
+            rect.left * width,
+            rect.top * height,
+            rect.right * width,
+            rect.bottom * height,
+          );
+          canvas.drawRect(transformedRect, paint);
+        }
+      }),
+    );
   }
 
   @override
-  bool shouldRepaint(_FacePainter oldDelegate) {
-    return rect != oldDelegate.rect || draw != oldDelegate.draw;
-  }
+  bool shouldRepaint(_FacePainter oldDelegate) => true;
 }
+// }
