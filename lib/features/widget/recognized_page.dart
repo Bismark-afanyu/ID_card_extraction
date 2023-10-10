@@ -48,7 +48,13 @@ class _RecognizePageState extends State<RecognizePage> {
                           ),
                           Stack(
                             children: [
-                              Container(child: Image.asset(widget.path!)),
+                              Container(
+                                  height: 100,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        image: AssetImage(widget.path!),
+                                        fit: BoxFit.cover),
+                                  )),
                               for (Face face in _faces)
                                 _drawFaceRect(face, context),
                             ],
