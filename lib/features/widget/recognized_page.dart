@@ -66,9 +66,7 @@ class _RecognizePageState extends State<RecognizePage> {
       height: height / 2,
       child: Stack(
         children: [
-          Positioned(
-            child: Image.file(File(inputImage.filePath!)),
-          ),
+          Image.file(File(inputImage.filePath!)),
           for (Face face in _faces) _drawFaceRect(face),
         ],
       ),
@@ -79,7 +77,7 @@ class _RecognizePageState extends State<RecognizePage> {
     final rect = face.boundingBox;
     final paint = Paint()
       ..color = Colors.red
-      ..strokeWidth = 0.1;
+      ..strokeWidth = 2.0;
 
     return CustomPaint(
       painter: _FacePainter(rect, paint),
