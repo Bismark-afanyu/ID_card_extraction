@@ -22,6 +22,7 @@ class _RecognizePageState extends State<RecognizePage> {
   @override
   void initState() {
     super.initState();
+    inputImage = InputImage.fromFilePath(widget.path);
     _processImage(inputImage);
   }
 
