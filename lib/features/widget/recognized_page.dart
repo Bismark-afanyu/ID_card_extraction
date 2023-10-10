@@ -105,7 +105,7 @@ class _RecognizePageState extends State<RecognizePage> {
       _controller.text = recognizedText.text;
 
       setState(() {
-        _faces = faces;
+        // _faces = faces;
         _isBusy = false;
       });
     } catch (e) {
