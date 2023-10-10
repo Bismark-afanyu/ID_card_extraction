@@ -53,7 +53,8 @@ class _RecognizePageState extends State<RecognizePage> {
                                   decoration: BoxDecoration(
                                     image: DecorationImage(
                                         image: AssetImage(widget.path!),
-                                        fit: BoxFit.cover),
+                                        fit: BoxFit.cover
+                                        ),
                                   )),
                               for (Face face in _faces)
                                 _drawFaceRect(face, context),
