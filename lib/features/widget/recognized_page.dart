@@ -13,13 +13,14 @@ class RecognizePage extends StatefulWidget {
 class _RecognizePageState extends State<RecognizePage> {
   bool _isBusy = false;
   final TextEditingController _controller = TextEditingController();
+  late InputImage inputImage;
   List<Face> _faces = [];
 
   @override
   void initState() {
     super.initState();
     final InputImage inputImage = InputImage.fromFilePath(widget.path!);
-    print(inputImage);
+    print(inputImage.filePath);
     processImage(inputImage);
   }
 
@@ -36,30 +37,29 @@ class _RecognizePageState extends State<RecognizePage> {
               : SingleChildScrollView(
                   child: Column(
                     children: [
-                  Container(
-                    height: 100,
-                    child: TextFormField(
-                      controller: _controller,
-                      maxLines: height,
-                      decoration: const InputDecoration(
-                          hintText: "Text goes here..."),
-                    ),
-                  ),
-                  Stack(
-                    children: [
-                      Positioned(
-                        child: Container(
-                            decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage(widget.path!),
-                              fit: BoxFit.cover),
-                        )),
-                      )
+                      Container(
+                        height: 100,
+                        child: TextFormField(
+                          controller: _controller,
+                          maxLines: height,
+                          decoration: const InputDecoration(
+                              hintText: "Text goes here..."),
+                        ),
+                      ),
+                      Stack(
+                        children: [
+                          Positioned(
+                            child: Container(
+                                decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage(inputImage.filePath!), fit: BoxFit.cover),
+                            )),
+                          )
 
-                      // for (Face face in _faces)
-                      //   _drawFaceRect(face, context),
-                    ],
-                  ),
+                          // for (Face face in _faces)
+                          //   _drawFaceRect(face, context),
+                        ],
+                      ),
                     ],
                   ),
                 )),
