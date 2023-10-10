@@ -24,7 +24,7 @@ class _RecognizePageState extends State<RecognizePage> {
     // processImage(inputImage);
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       final InputImage inputImage = InputImage.fromFilePath(widget.path!);
-      print(inputImage);
+      print(inputImage.filePath);
       processImage(inputImage);
     });
   }
