@@ -32,13 +32,18 @@ class _RecognizePageState extends State<RecognizePage> {
               ? const Center(child: CircularProgressIndicator())
               : Container(
                   padding: const EdgeInsets.all(20),
-                  child: TextFormField(controller: _controller, maxLines: MediaQuery.of(context).size.height.toInt(), decoration: const InputDecoration(hintText: "Text goes here..."),))),
+                  child: Column(
+                    children: [
+                      TextFormField(controller: _controller, maxLines: MediaQuery.of(context).size.height.toInt(), decoration: const InputDecoration(hintText: "Text goes here..."),),
+                      Container(child: Image.asset(widget.path!),)
+                    ],
+                  ))),
     );
   }
 
   void processImage(InputImage image) async {
     final textRecognizer = TextRecognizer(script: TextRecognitionScript.latin);
-        final options = FaceDetectorOptions();
+        final options = FaceDetectorOptions(performanceMode: FaceDetectorMode.accurate);
         final faceDetector = FaceDetector(options: options);
     setState(() {
       _isBusy = true;
