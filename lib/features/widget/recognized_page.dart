@@ -165,6 +165,6 @@ class _FacePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_FacePainter oldDelegate) => true;
+  bool shouldRepaint(_FacePainter oldDelegate) => false;
 }
 // }
