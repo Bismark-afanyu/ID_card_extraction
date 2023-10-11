@@ -65,8 +65,8 @@ class _RecognizePageState extends State<RecognizePage> {
       child: Stack(
         children: [
           Image.file(File(inputImage.filePath!)),
-          CustomPaint(painter: _FacePainter(_faces),)
-          // for (Face face in _faces) _drawFaceRect(face, context, path),
+          // CustomPaint(painter: _FacePainter(_faces),)
+          for (Face face in _faces) _drawFaceRect(face, context, path),
         ],
       ),
     );
@@ -82,7 +82,7 @@ class _RecognizePageState extends State<RecognizePage> {
     return Positioned(
       left: rect.left,right: rect.right,top: rect.top,bottom: rect.bottom,
       child: CustomPaint(
-        // painter: _FacePainter(rect: rect, imagePath: path),
+        painter: _FacePainter(rect: rect, imagePath: path),
       ),
     );
   }
@@ -136,66 +136,67 @@ class _FacePainter extends CustomPainter {
   //   return rect != oldDelegate.rect || draw != oldDelegate.draw;
   // }
 
-  // final Rect rect;
-  // final String imagePath;
+  final Rect rect;
+  final String imagePath;
 
-  // _FacePainter({required this.rect, required this.imagePath});
+  _FacePainter({required this.rect, required this.imagePath});
 
-  // @override
-  // void paint(Canvas canvas, Size size) {
-  //   final draw = Paint()
-  //     ..color = Colors.red
-  //     ..style = PaintingStyle.stroke
-  //     ..strokeWidth = 0.10;
+  @override
+  void paint(Canvas canvas, Size size) {
+    final draw = Paint()
+      ..color = Colors.red
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 0.10;
 
-  //   // final image = FileImage(File(imagePath));
-  //   // image.resolve(ImageConfiguration()).addListener(
-  //   //   ImageStreamListener((info, _) {
-  //   //     final imageInfo = info.image;
-  //   //     final width = size.width / imageInfo.width;
-  //   //     final height = size.height / imageInfo.height;
+    final image = FileImage(File(imagePath));
+    image.resolve(ImageConfiguration()).addListener(
+      ImageStreamListener((info, _) {
+        final imageInfo = info.image;
+        final width = size.width / imageInfo.width;
+        final height = size.height / imageInfo.height;
 
-  //       // final transformedRect = Rect.fromLTRB(
-  //       //   rect.left * width,
-  //       //   rect.top * height,
-  //       //   rect.right * width,
-  //       //   rect.bottom * height,
-  //       // );
-  //       canvas.drawRect(rect, draw);
-  //     // }),
-  //   // );
-  // }
+        final transformedRect = Rect.fromLTRB(
+          rect.left * width,
+          rect.top * height,
+          rect.right * width,
+          rect.bottom * height,
+        );
+        canvas.drawRect(rect, draw);
+      }),
+    );
+  }
 
   @override
   bool shouldRepaint(_FacePainter oldDelegate) => false;
-  _FacePainter(this.faces);
-  final List<Face> faces;
-  @override
-  void paint(Canvas canvas, Size size) {
-    final Paint paint1 = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1.0
-      ..color = Colors.red;
-    for (final Face face in faces) {
-      final left = face.boundingBox.left;
-      final top = face.boundingBox.top;
-      final right = face.boundingBox.right;
-      final bottom = face.boundingBox.bottom;
 
-      canvas.drawRect(Rect.fromLTRB(left, top, right, bottom), paint1);
-      // void paintContour(FaceContourType type) {
-      //   final contour = face.contours[type];
-      //   if (contour?.points != null){
-      //     for (final Point point in contour!.points){
-      //       canvas.drawCircle(Offset(dx, dy))
-      //     }
-      //   }
-      // }
-    }
-    // @override
-    // bool shouldRepaint(F oldDelegate) {
-    //   return oldDelegate.imageSize != imageSize || oldDelegate.faces != faces;
-    // }
-  }
+  // _FacePainter(this.faces);
+  // final List<Face> faces;
+  // @override
+  // void paint(Canvas canvas, Size size) {
+  //   final Paint paint1 = Paint()
+  //     ..style = PaintingStyle.stroke
+  //     ..strokeWidth = 1.0
+  //     ..color = Colors.red;
+  //   for (final Face face in faces) {
+  //     final left = face.boundingBox.left;
+  //     final top = face.boundingBox.top;
+  //     final right = face.boundingBox.right;
+  //     final bottom = face.boundingBox.bottom;
+
+  //     canvas.drawRect(Rect.fromLTRB(left, top, right, bottom), paint1);
+  //     // void paintContour(FaceContourType type) {
+  //     //   final contour = face.contours[type];
+  //     //   if (contour?.points != null){
+  //     //     for (final Point point in contour!.points){
+  //     //       canvas.drawCircle(Offset(dx, dy))
+  //     //     }
+  //     //   }
+  //     // }
+  //   }
+  //   // @override
+  //   // bool shouldRepaint(F oldDelegate) {
+  //   //   return oldDelegate.imageSize != imageSize || oldDelegate.faces != faces;
+  //   // }
+  // }
 }
 // }
