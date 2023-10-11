@@ -67,7 +67,7 @@ class _RecognizePageState extends State<RecognizePage> {
       child: Stack(
         children: [
           Image.file(File(inputImage.filePath!)),
-          CustomPaint(painter: _FacePainter(_faces),)
+          Positioned(left: 0, top: 0,child: CustomPaint(painter: _FacePainter(_faces),))
           // for (Face face in _faces) _drawFaceRect(face, context, path),
         ],
       ),
