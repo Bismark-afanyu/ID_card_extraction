@@ -75,7 +75,7 @@ class _RecognizePageState extends State<RecognizePage> {
 
   Widget _drawFaceRect(Face face, BuildContext context, String path) {
     final rect = face.boundingBox;
-    print(rect);
+    print("Faces are here: ${rect}");
     // final paint = Paint()
     //   ..color = Colors.blue
     //   ..strokeWidth = 0.1;
@@ -153,11 +153,11 @@ class _FacePainter extends CustomPainter {
         final width = size.width / imageInfo.width;
         final height = size.height / imageInfo.height;
 
-        final transformedRect = Rect.fromLTWH(
+        final transformedRect = Rect.fromLTRB(
           rect.left * width,
           rect.top * height,
-          rect.width * width,
-          rect.height * height,
+          rect.right * width,
+          rect.bottom * height,
         );
         canvas.drawRect(transformedRect, draw);
       }),
