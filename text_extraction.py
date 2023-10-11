@@ -5,6 +5,9 @@ import re
 import cv2
 import os 
 from mtcnn import MTCNN
+import numpy as np
+
+from matplotlib import pyplot as plt
 
 # imgs = glob('/home/aja/Documents/ML/dataset/text_extraction/test/*')
 # image = imgs[1]
@@ -21,6 +24,47 @@ class TextExtract:
         self.num = {}  # numeric values extracted
         self.info = {}  # non-numeric values extracted
         self.extract(fields)  # method for extraction
+
+
+
+    def quality_check(image):
+
+        THRESH = 100
+
+        blur = cv2.Laplacian(image, cv2.CV_64F).var()
+
+        if blur >= THRESH:
+            print("Image is clear, continuing...")
+            return True
+        else: 
+            print("Blurry image, stopping preprocessing")
+            return False
+        
+
+    def binarization(image):
+        gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+        return gray_image
+
+    def noise_removal(image):
+        kernel = np.ones((1, 1), np.uint8)
+        image = cv2.dilate(image, kernel, iterations=1)
+        kernel = np.ones((1,1), np.uint8)
+        image = cv2.erode(image, kernel, iterations=1)
+        image = cv2.morphologyEx(image, cv2.MORPH_CLOSE, kernel)
+        image = cv2.medianBlur(image, 3)
+        return (image)
+
+
+    def thick_font(image):
+        # Dilation and Erosion
+
+        image = cv2.bitwise_not(image)
+        kernel = np.ones((2,2), np.uint8)
+        image = cv2.dilate(image, kernel, iterations=1)
+        image = cv2.bitwise_not(image)
+        return (image)
+   
 
     def numeric_handler(self):  # sourcery skip: raise-specific-error
         """ 
