@@ -80,8 +80,11 @@ class _RecognizePageState extends State<RecognizePage> {
     //   ..color = Colors.blue
     //   ..strokeWidth = 0.1;
 
-    return CustomPaint(
-      painter: _FacePainter(rect: rect, imagePath: path),
+    return Positioned(
+      left: rect.left,right: rect.right,top: rect.top,bottom: rect.bottom,
+      child: CustomPaint(
+        painter: _FacePainter(rect: rect, imagePath: path),
+      ),
     );
   }
 
