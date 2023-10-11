@@ -144,14 +144,14 @@ class _FacePainter extends CustomPainter {
     final draw = Paint()
       ..color = Colors.red
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 2.0;
+      ..strokeWidth = 0.10;
 
-    final image = FileImage(File(imagePath));
-    image.resolve(ImageConfiguration()).addListener(
-      ImageStreamListener((info, _) {
-        final imageInfo = info.image;
-        final width = size.width / imageInfo.width;
-        final height = size.height / imageInfo.height;
+    // final image = FileImage(File(imagePath));
+    // image.resolve(ImageConfiguration()).addListener(
+    //   ImageStreamListener((info, _) {
+    //     final imageInfo = info.image;
+    //     final width = size.width / imageInfo.width;
+    //     final height = size.height / imageInfo.height;
 
         // final transformedRect = Rect.fromLTRB(
         //   rect.left * width,
@@ -160,8 +160,8 @@ class _FacePainter extends CustomPainter {
         //   rect.bottom * height,
         // );
         canvas.drawRect(rect, draw);
-      }),
-    );
+      // }),
+    // );
   }
 
   @override
