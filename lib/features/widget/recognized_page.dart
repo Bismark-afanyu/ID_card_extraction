@@ -36,15 +36,13 @@ class _RecognizePageState extends State<RecognizePage> {
       ),
       body: _isBusy
           ? const Center(child: CircularProgressIndicator())
-          : SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildTextInputField(height),
-                  _buildImageContainer(height, context, inputImage.filePath!),
-                ],
-              ),
-            ),
+          : Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildTextInputField(height),
+              _buildImageContainer(height, context, inputImage.filePath!),
+            ],
+          ),
     );
   }
 
@@ -67,7 +65,7 @@ class _RecognizePageState extends State<RecognizePage> {
       child: Stack(
         children: [
           Image.file(File(inputImage.filePath!)),
-          Positioned(left: 0, top: 0,child: CustomPaint(painter: _FacePainter(_faces),))
+          CustomPaint(painter: _FacePainter(_faces),)
           // for (Face face in _faces) _drawFaceRect(face, context, path),
         ],
       ),
