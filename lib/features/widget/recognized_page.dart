@@ -75,6 +75,7 @@ class _RecognizePageState extends State<RecognizePage> {
 
   Widget _drawFaceRect(Face face, BuildContext context, String path) {
     final rect = face.boundingBox;
+    print(rect);
     // final paint = Paint()
     //   ..color = Colors.blue
     //   ..strokeWidth = 0.1;
@@ -100,7 +101,6 @@ class _RecognizePageState extends State<RecognizePage> {
       final RecognizedText recognizedText =
           await textRecognizer.processImage(inputor);
       final List<Face> faces = await faceDetector.processImage(inputor);
-     
 
       _controller.text = recognizedText.text;
 
