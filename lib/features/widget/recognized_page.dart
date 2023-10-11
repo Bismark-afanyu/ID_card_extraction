@@ -153,13 +153,13 @@ class _FacePainter extends CustomPainter {
         final width = size.width / imageInfo.width;
         final height = size.height / imageInfo.height;
 
-        final transformedRect = Rect.fromLTRB(
-          rect.left * width,
-          rect.top * height,
-          rect.right * width,
-          rect.bottom * height,
-        );
-        canvas.drawRect(transformedRect, draw);
+        // final transformedRect = Rect.fromLTRB(
+        //   rect.left * width,
+        //   rect.top * height,
+        //   rect.right * width,
+        //   rect.bottom * height,
+        // );
+        canvas.drawRect(rect, draw);
       }),
     );
   }
