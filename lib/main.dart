@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
                       if (value != '') {
                         Navigator.push(
                             context,
-                            MaterialPageRoute( 
+                            MaterialPageRoute(
                                 builder: (_) => RecognizePage(path: value)));
                       }
                     });
