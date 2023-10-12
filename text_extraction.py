@@ -4,7 +4,7 @@ from glob import glob
 import csv
 
 imgs = glob('/home/aja/Documents/ML/dataset/text_extraction/test/*')
-image = imgs[1]
+image = imgs[0]
 
 
 class TextExtract:
