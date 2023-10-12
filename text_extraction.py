@@ -53,8 +53,8 @@ class TextExtract:
     def extract(self):
         # still to be implemented
         nums = self.numeric_handler()
-        self.toCSV()
-        print(nums) # for testing purpose only, remove when not need anymore
+        # self.toCSV()
+        print("\n",nums, "\n") # for testing purpose only, remove when not need anymore
     
     def toCSV(self):
         """This method saves a csv file called id_cards that containes every information collected.
