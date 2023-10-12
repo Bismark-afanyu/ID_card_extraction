@@ -85,3 +85,51 @@ class TextExtract:
 
 
 text = TextExtract(image)
+import pytest
+from text_extraction import numeric_handler
+
+@pytest.mark.parametrize(
+    "img, expected",
+    [
+        # Happy path tests
+        ("image1.jpg", ["123", "456.78"]),
+        ("image2.jpg", ["9.99", "0.01"]),
+        ("image3.jpg", ["42"]),
+
+        # Edge cases
+        ("image4.jpg", []),
+        ("image5.jpg", ["0"]),
+        ("image6.jpg", ["1.23"]),
+
+        # Error cases
+        ("image7.jpg", pytest.raises(Exception)),
+        ("image8.jpg", pytest.raises(Exception)),
+    ],
+    ids=[
+        # Happy path test IDs
+        "test_happy_path_1",
+        "test_happy_path_2",
+        "test_happy_path_3",
+
+        # Edge case test IDs
+        "test_edge_case_1",
+        "test_edge_case_2",
+        "test_edge_case_3",
+
+        # Error case test IDs
+        "test_error_case_1",
+        "test_error_case_2",
+    ]
+)
+def test_numeric_handler(img, expected):
+    # Arrange
+
+    # Act
+    if isinstance(expected, list):
+        result = numeric_handler(img)
+    else:
+        with expected:
+            result = numeric_handler(img)
+
+    # Assert
+    assert result == expected
