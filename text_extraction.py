@@ -18,7 +18,7 @@ class TextExtract:
         self.string = {}  # non-numeric values extracted
         self.extract()  # method for extraction
 
-    def numeric_handler(self):  # sourcery skip: raise-specific-error
+    def numeric_handler(self):
         """ 
         method responsible for handling numeric values found on the image.
 
