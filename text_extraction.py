@@ -1,7 +1,6 @@
 import pytesseract
 import easyocr
 from glob import glob
-import re
 import csv
 
 imgs = glob('/home/aja/Documents/ML/dataset/text_extraction/test/*')
