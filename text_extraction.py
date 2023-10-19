@@ -8,7 +8,7 @@ from mtcnn import MTCNN
 
 # imgs = glob('/home/aja/Documents/ML/dataset/text_extraction/test/*')
 # image = imgs[1]
-image = "C:/Users/BANTA/Desktop/ML projects/dataSets/Aadhaar/106.jpg"
+image = '../../id card dataset/Aadhaar/id.jpg'
 
 
 class TextExtract:
