@@ -5,6 +5,7 @@ import pytesseract as pt
 import re
 import os
 import easyocr
+from mtcnn import MTCNN
 
 """
 Page segmentation modes:
@@ -39,7 +40,7 @@ def remove_non_alphanumeric(string):
     return cleaned_string
 
 
-img_path = '../../id card dataset/Aadhaar/id.jpg'
+img_path = './id.jpg'
 # get the image path
 img = cv2.imread(img_path, 0)
 
@@ -219,7 +220,40 @@ for r in RegionFront.CCCD.ROIS:
     # show_image(img_final)
 print(front_infos)
 
+# extract face
 
+# def detect_faces(img_path):
+#     # img_data = cv2.imread(img_path)
+#     images = glob(img_path)
+#     # Load the image
+#     img_data = cv2.imread(images[0])
+#     # Creating an instance of the MTCNN detector
+#     detector = MTCNN()
+
+#     # Detecting the faces in the image
+#     faces = detector.detect_faces(img_data)
+
+#     # Creating a directory to save the cropped faces
+#     save_dir = f'{os.path.dirname(os.path.abspath(__file__))}/cropped_faces'
+#     os.makedirs(save_dir, exist_ok=True)
+
+#     # Croping and saving the detected faces
+#     for i, face in enumerate(faces):
+#         x, y, w, h = face['box']
+#         cropped_face = img_data[y:y+h, x:x+w]
+#         cv2.imwrite(f'{save_dir}/face_{i}.jpg', cropped_face)
+#         image = str(save_dir) + "/face_" + str(i) + ".jpg"
+#         print (image) # for testing purpose only, remove when not need anymore
+
+#         # Drawing bounding boxes around the detected faces
+#         cv2.rectangle(img_data, (x, y), (x+w, y+h), (0, 255, 0), 2)
+
+#         # Print the cropped face
+#         print(f'Cropped Face {i}:') # for testing purpose only, remove when not need anymore
+#         print(cropped_face) # for testing purpose only, remove when not need anymore
+#     return img_data
+# face = detect_faces(img_path)
+# show_image(face)
 class RegionBack():
     class CCCD(object):
         # coordinates are of the form (y, x , h , w )
@@ -234,7 +268,7 @@ class RegionBack():
         }
 
 
-img_back = cv2.imread('../../id card dataset/Aadhaar/id_back.jpg', 0)
+img_back = cv2.imread('./id_back.jpg', 0)
 show_image(img_back)
 
 # dictionary where the infos are stored
