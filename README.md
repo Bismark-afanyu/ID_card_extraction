@@ -1,5 +1,5 @@
 ### ID_card_extraction
-the extraction of information from ID cards 
+the project allows the extraction of information from ID cards 
 
 ## Libraries 
 
