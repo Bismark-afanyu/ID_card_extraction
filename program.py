@@ -13,7 +13,7 @@ import numpy as np
 import urllib
 import inspect
 
-from utils import show_image, crop_image_roi, load_from_url, text_extract, numeric_handler, remove_non_alphanumeric, create_json
+from utils import show_image, crop_image_roi, load_from_url, text_extract, numeric_handler, remove_non_alphanumeric, create_json, detect_faces
 from classes import RegionFront, RegionBack
 
 img_path = './images/id.jpg'
@@ -74,7 +74,8 @@ for r in RegionFront.CCCD.ROIS:
 
         # save the directory of the cropped image of the signature
         front_infos[r] = f'{save_dir}/{front_infos["surname"].strip().lower()}_signature.jpg'
-
+    # extract the face
+    front_infos["face"] = detect_faces(img)
 print(front_infos)
 
 
